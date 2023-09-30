@@ -1,7 +1,10 @@
 import React from "react";
 import logo from "../../assets/logo1.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UploadDocuments = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex ">
       {/* Navabar */}
@@ -20,15 +23,17 @@ const UploadDocuments = () => {
             </div>
             <div className="">
               <form className="flex flex-col gap-9"
-                action="http://127.0.0.1:5000/supplier/fileUpload.upload"
+                action="http://127.0.0.1:5000/supplier/fileUpload"
                 method="post"
                 encType="multipart/form-data"
               >
+                <input type="none" name="_id" value={window.localStorage.getItem("supID")} className="hidden" />
                 <input type="file" name="file" accept=".pdf" />
                 <button className="bg-[#FCBD16] py-2 rounded-md block font-bold tracking-wider">
                   Upload
                 </button>
               </form>
+              <a target="_blank" href={`http://127.0.0.1:5000/supplier/downloadFiles/${window.localStorage.getItem("supID")}`}>Download Last Upload</a>
             </div>
           </div>
         </div>
