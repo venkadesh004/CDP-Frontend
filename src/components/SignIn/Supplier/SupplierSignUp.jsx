@@ -28,7 +28,7 @@ const SupplierSignUp = (props) => {
   return (
     <div className="flex h-[80vh] w-full items-center ml-9">
       <div className="flex flex-col gap-9">
-        <h1 className="font-bold text-4xl">Supplier Sign In</h1>
+        <h1 className="font-bold text-4xl">Supplier Sign Up</h1>
         <form
           className="flex flex-col w-full gap-9 "
           onSubmit={handleSubmit((data) => {

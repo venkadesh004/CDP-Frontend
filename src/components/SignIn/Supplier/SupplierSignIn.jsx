@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const SupplierSignIn = (props) => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const SupplierSignIn = (props) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async(data) =>{
+  const onSubmit = async (data) => {
     console.log(data);
     axios.post("http://127.0.0.1:5000/supplier/getSupplier" , data).then((res)=>{
       console.log(res);
@@ -31,28 +32,29 @@ const SupplierSignIn = (props) => {
       
     }).catch((err)=>{
         console.log(err);
-        if(err.response.status === 401){
-          setMessage("Wrong Password")
+        if (err.response.status === 401) {
+          setMessage("Wrong Password");
         }
-        if(err.response.status === 404){
-          setMessage("User not found")
+        if (err.response.status === 404) {
+          setMessage("User not found");
         }
-       
-    })
-    
-  }
-
+      });
+  };
 
   const [signUp, setSignUp] = useState(0);
   return (
     <div>
+      
       {signUp === 0 && (
         <div className="flex h-[80vh] w-full items-center ml-9">
           <div className="flex flex-col gap-9">
             <h1 className="font-bold text-4xl">Supplier Sign In</h1>
-            <form className="flex flex-col w-full gap-9 " onSubmit={handleSubmit((data=>{
-              onSubmit(data);
-            }))}>
+            <form
+              className="flex flex-col w-full gap-9 "
+              onSubmit={handleSubmit((data) => {
+                onSubmit(data);
+              })}
+            >
               <div className="flex flex-col gap-4">
                 <input
                   {...register("email", { required: "this is required" })}

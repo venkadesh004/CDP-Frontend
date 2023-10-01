@@ -9,7 +9,7 @@ const Navbar = () => {
         <h1 className="">SUPPLYCHAIN</h1>
       </div>
       <div className="flex items-center gap-9">
-        <button className="text-lg font-semibold">Login</button>
+        <Link to="/signUp" className="text-lg font-semibold">Login</Link>
         <Link className="text-lg font-semibold bg-[#FCBD16] px-4 py-2 rounded-full" to="/signUp">Sign Up</Link>
       </div>
     </nav>
