@@ -17,19 +17,20 @@ const SupplierSignIn = (props) => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    axios
-      .post("http://127.0.0.1:5000/supplier/getSupplier", data)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data[0]["_id"]);
-        window.localStorage.setItem("supID", res.data[0]["_id"]);
-        if (res.data[0].authorizer === "false") {
-          navigate("/uploadDocuments");
-        } else {
-          navigate("/materialsUpload");
-        }
-      })
-      .catch((err) => {
+    axios.post("http://127.0.0.1:5000/supplier/getSupplier" , data).then((res)=>{
+      console.log(res);
+      console.log(res.data[0]["_id"]);
+      window.localStorage.setItem("supID", res.data[0]["_id"]);
+      console.log(res.data[0]);
+      if((res.data[0].filename === "") || (res.data[0]["supplierID"] === "None" && res.data[0]["authorizer"] !== "")){
+        navigate("/uploadDocuments")
+      } else if (res.data[0]["supplierID"] !== "None" && res.data[0]["authorizer"] !== "") {
+        navigate('/supplierLandingPage');
+      } else {
+        navigate("/wait")
+      }
+      
+    }).catch((err)=>{
         console.log(err);
         if (err.response.status === 401) {
           setMessage("Wrong Password");

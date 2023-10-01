@@ -7,7 +7,7 @@ const Approved = () => {
     useEffect(()=>{
         axios.get("http://127.0.0.1:5000/admin/getApprovedData").then((res)=>{
             setApproved(res.data)
-        })
+        });
     },[])
 
   return (
@@ -18,7 +18,7 @@ const Approved = () => {
             <img src={logo} alt="Logo" className="h-10" />
             <h1 className="">SUPPLYCHAIN</h1>
           </div>
-          <h1 className="font-semibold text-xl">Unapproved Suppliers</h1>
+          <h1 className="font-semibold text-xl">Approved Suppliers</h1>
           <Link
             to="/admin"
             className="px-4 py-2 bg-[#FCBD16] rounded-md font-semibold"
@@ -52,9 +52,6 @@ const Approved = () => {
                   ) : (
                     <p className="cursor-pointer">No Document</p>
                   )}
-                  <button className="px-4 py-2 bg-white/20 rounded-md font-semibold">
-                    Approve
-                  </button>
                 </div>
               </div>
             </li>

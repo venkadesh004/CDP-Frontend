@@ -3,7 +3,7 @@ import logo from "../../assets/logo1.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const UploadDocuments = () => {
+const UploadCompanyDocuments = () => {
   const [uploaded, setUploaded] = useState(null);
   const [yes, setYes] = useState(false);
 
@@ -27,8 +27,8 @@ const UploadDocuments = () => {
         <div className="h-[80vh] flex items-center justify-start  ml-9">
           <div className=" flex flex-col gap-10">
             <div className="flex flex-col gap-4 tracking-wider">
-              <h1 className="text-4xl font-bold ">Upload Documents</h1>
-              <p>Will be verified by admin</p>
+              <h1 className="text-4xl font-bold ">Upload Company Documents</h1>
+              <p>It will be shown to the suppliers</p>
             </div>
             <div className="">
               <form
@@ -38,7 +38,7 @@ const UploadDocuments = () => {
                   const data = new FormData(e.target);
                   await axios({
                     method: "post",
-                    url: "http://127.0.0.1:5000/supplier/fileUpload",
+                    url: "http://127.0.0.1:5000/company/fileUpload",
                     data: {
                       file: data.get('file'),
                       _id: data.get('id')
@@ -46,7 +46,7 @@ const UploadDocuments = () => {
                     headers: {"Content-Type": "multipart/form-data"}
                   }).then(res => {
                     console.log(res);
-                    navigate('/wait');
+                    navigate('/companyLandingPage');
                   }).catch(err => {
                     console.log(err);
                   })
@@ -55,7 +55,7 @@ const UploadDocuments = () => {
                 <input
                   type="none"
                   name="id"
-                  value={window.localStorage.getItem("supID")}
+                  value={window.localStorage.getItem("compID")}
                   className="hidden"
                 />
                 <input type="file" name="file" accept=".pdf" id="file" />
@@ -79,7 +79,7 @@ const UploadDocuments = () => {
                   Back
                 </button>
               </form>
-              {/* <a target="_blank" href={`http://127.0.0.1:5000/supplier/downloadFiles/${window.localStorage.getItem("supID")}`}>Download Last Upload</a> */}
+              {/* <a target="_blank" href={`http://127.0.0.1:5000/supplier/downloadFiles/${window.localStorage.getItem("compID")}`}>Download Last Upload</a> */}
             </div>
           </div>
         </div>
@@ -90,4 +90,4 @@ const UploadDocuments = () => {
   );
 };
 
-export default UploadDocuments;
+export default UploadCompanyDocuments;
