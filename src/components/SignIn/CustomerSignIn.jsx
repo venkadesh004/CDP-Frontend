@@ -12,7 +12,7 @@ const CustomerSignIn = (props) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const response = await axios
+    await axios
       .post("http://127.0.0.1:5000/company/addCompany", data)
       .then((res) => {
         setMessage(res.data);
@@ -23,7 +23,7 @@ const CustomerSignIn = (props) => {
         console.log(err);
       });
   };
-  return (
+  return (  
     <div className="flex h-[80vh] w-full items-center ml-9">
       {signIn === 0 && (
         <div className="flex flex-col gap-9">

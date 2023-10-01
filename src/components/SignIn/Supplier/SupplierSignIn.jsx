@@ -25,7 +25,7 @@ const SupplierSignIn = (props) => {
       if((res.data[0].filename === "") || (res.data[0]["supplierID"] === "None" && res.data[0]["authorizer"] !== "")){
         navigate("/uploadDocuments")
       } else if (res.data[0]["supplierID"] !== "None" && res.data[0]["authorizer"] !== "") {
-        navigate('/materialsUpload');
+        navigate('/supplierLandingPage');
       } else {
         navigate("/wait")
       }
