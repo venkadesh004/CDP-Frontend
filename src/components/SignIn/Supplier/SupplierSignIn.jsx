@@ -20,7 +20,12 @@ const SupplierSignIn = (props) => {
       console.log(res);
       console.log(res.data[0]["_id"]);
       window.localStorage.setItem("supID", res.data[0]["_id"]);
-      navigate("/uploadDocuments");
+      if(res.data[0].authorizer === "false"){
+        navigate("/uploadDocuments")
+      }else{
+        navigate("/materialsUpload")
+      }
+      
     }).catch((err)=>{
         console.log(err);
         if(err.response.status === 401){

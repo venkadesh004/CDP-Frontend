@@ -37,7 +37,7 @@ const SupplierSignUp = (props) => {
         >
           <div className="flex flex-col gap-4">
             <input
-              {...register("username", { required: "this is required" })}
+              {...register("name", { required: "this is required" })}
               type="text"
               placeholder="Username"
               className="w-96 border-2 py-1 px-2 rounded-md  "

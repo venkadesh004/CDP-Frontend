@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useId } from "react";
 import logo from "../../assets/logo1.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const UploadDocuments = () => {
+  const [uploaded, setUploaded] = useState(null);
+  const [yes, setYes] = useState(false);
+
+  const checkUpload = () => {
+    if (uploaded !== null) {
+      setYes(true);
+    }
+  };
   const navigate = useNavigate();
   return (
     <div className="flex ">
@@ -22,18 +30,42 @@ const UploadDocuments = () => {
               <p>Will be verified by admin</p>
             </div>
             <div className="">
-              <form className="flex flex-col gap-9"
+              <form
+                className="flex flex-col gap-9"
                 action="http://127.0.0.1:5000/supplier/fileUpload"
                 method="post"
                 encType="multipart/form-data"
               >
-                <input type="none" name="_id" value={window.localStorage.getItem("supID")} className="hidden" />
-                <input type="file" name="file" accept=".pdf" />
-                <button className="bg-[#FCBD16] py-2 rounded-md block font-bold tracking-wider">
+                <input
+                  type="none"
+                  name="_id"
+                  value={window.localStorage.getItem("supID")}
+                  className="hidden"
+                />
+                <input type="file" name="file" accept=".pdf" id="file" />
+                <button
+                  className="bg-[#FCBD16] py-2 rounded-md block font-bold tracking-wider"
+                  onClick={() => {
+                    navigate("/wait");
+                  }}
+                  onChange={(e) => {
+                    setUploaded(e.target.files[0]);
+                    setYes(true);
+                    console.log(e.target.files[0]);
+                  }}
+                >
                   Upload
                 </button>
+                <button
+                  className="bg-[#FCBD16] py-2 rounded-md block font-bold tracking-wider"
+                  onClick={() => {
+                    navigate("/signUp");
+                  }}
+                >
+                  Back
+                </button>
               </form>
-              <a target="_blank" href={`http://127.0.0.1:5000/supplier/downloadFiles/${window.localStorage.getItem("supID")}`}>Download Last Upload</a>
+              {/* <a target="_blank" href={`http://127.0.0.1:5000/supplier/downloadFiles/${window.localStorage.getItem("supID")}`}>Download Last Upload</a> */}
             </div>
           </div>
         </div>

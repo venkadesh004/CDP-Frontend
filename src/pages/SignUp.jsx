@@ -7,6 +7,8 @@ import find from "../assets/magnifying-glass.svg";
 import { useState } from "react";
 import CustomerSignIn from "../components/SignIn/CustomerSignIn";
 import SupplierSignIn from "../components/SignIn/Supplier/SupplierSignIn";
+import Login from "../components/Admin/Login";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
 
@@ -56,7 +58,7 @@ const SignUp = () => {
                 desc="Verifies the Suppliers"
               />
             </div>
-            <button className="bg-[#FCBD16] py-2 rounded-md block font-bold tracking-wider">Back</button>
+            <Link to = "/" className="text-center bg-[#FCBD16] py-2 rounded-md block font-bold tracking-wider text-lg">Back</Link>
           </div>
         </div>
         )}
@@ -65,6 +67,9 @@ const SignUp = () => {
         )}
         {page===2 && (
             <SupplierSignIn page = {page} setPage = {setPage}/>
+        )}
+        {page==3 && (
+          <Login page = {page} setPage = {setPage}/>
         )}
       </div>
 
