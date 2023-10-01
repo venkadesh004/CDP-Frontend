@@ -13,6 +13,7 @@ const UploadDocuments = () => {
     }
   };
   const navigate = useNavigate();
+
   return (
     <div className="flex ">
       {/* Navabar */}
@@ -32,27 +33,40 @@ const UploadDocuments = () => {
             <div className="">
               <form
                 className="flex flex-col gap-9"
-                action="http://127.0.0.1:5000/supplier/fileUpload"
-                method="post"
-                encType="multipart/form-data"
+                onSubmit={async(e) => {
+                  e.preventDefault();
+                  const data = new FormData(e.target);
+                  await axios({
+                    method: "post",
+                    url: "http://127.0.0.1:5000/supplier/fileUpload",
+                    data: {
+                      file: data.get('file'),
+                      _id: data.get('id')
+                    },
+                    headers: {"Content-Type": "multipart/form-data"}
+                  }).then(res => {
+                    console.log(res);
+                    navigate('/wait');
+                  }).catch(err => {
+                    console.log(err);
+                  })
+                }}
               >
                 <input
                   type="none"
-                  name="_id"
+                  name="id"
                   value={window.localStorage.getItem("supID")}
                   className="hidden"
                 />
                 <input type="file" name="file" accept=".pdf" id="file" />
                 <button
                   className="bg-[#FCBD16] py-2 rounded-md block font-bold tracking-wider"
-                  onClick={() => {
-                    navigate("/wait");
-                  }}
-                  onChange={(e) => {
-                    setUploaded(e.target.files[0]);
-                    setYes(true);
-                    console.log(e.target.files[0]);
-                  }}
+
+                  // onChange={(e) => {
+                  //   setUploaded(e.target.files[0]);
+                  //   setYes(true);
+                  //   console.log(e.target.files[0]);
+                  // }}
                 >
                   Upload
                 </button>

@@ -20,10 +20,13 @@ const SupplierSignIn = (props) => {
       console.log(res);
       console.log(res.data[0]["_id"]);
       window.localStorage.setItem("supID", res.data[0]["_id"]);
-      if(res.data[0].authorizer === "false"){
+      console.log(res.data[0]);
+      if((res.data[0].filename === "") || (res.data[0]["supplierID"] === "None" && res.data[0]["authorizer"] !== "")){
         navigate("/uploadDocuments")
-      }else{
-        navigate("/materialsUpload")
+      } else if (res.data[0]["supplierID"] !== "None" && res.data[0]["authorizer"] !== "") {
+        navigate('/materialsUpload');
+      } else {
+        navigate("/wait")
       }
       
     }).catch((err)=>{
