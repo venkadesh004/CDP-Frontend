@@ -1,6 +1,7 @@
 import React from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import worker from "../../assets/worker.json";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -25,12 +26,12 @@ const Hero = () => {
             </ul>
           </div>
           <div className="flex gap-9">
-            <button className="tracking-wider bg-[#fcbd16] px-7 py-4 rounded-2xl">
+            <Link className="tracking-wider bg-[#fcbd16] px-7 py-4 rounded-2xl" to="/signUp">
               Find a Supplier
-            </button>
-            <button className="tracking-wider border-solid border-2 border-black/70 px-7 py-4 rounded-2xl">
+            </Link>
+            <Link className="tracking-wider border-solid border-2 border-black/70 px-7 py-4 rounded-2xl" to="/signUp">
               Supplier Registeration
-            </button>
+            </Link>
           </div>
         </div>
         <div className="relative">
