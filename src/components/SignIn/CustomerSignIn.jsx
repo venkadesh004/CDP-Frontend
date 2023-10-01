@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CustomerSignIn = (props) => {
   const [message , setMessage] = useState("")
   const [signIn, setsignIn] = useState(0);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,17 +30,38 @@ const CustomerSignIn = (props) => {
       {signIn === 0 && (
         <div className="flex flex-col gap-9">
           <h1 className="font-bold text-4xl">Customer Sign In</h1>
-          <form className="flex flex-col w-full gap-9 ">
+          <form className="flex flex-col w-full gap-9 " onSubmit={(e) => {
+            e.preventDefault();
+            console.log(e.currentTarget.elements.email.value);
+            console.log(e.currentTarget.elements.password.value);
+
+            axios.post("http://127.0.0.1:5000/company/getCompany", {
+              "email": e.currentTarget.elements.email.value,
+              "password": e.currentTarget.elements.password.value
+            }).then(res => {
+              console.log(res);
+              window.localStorage.setItem("compID", res.data[0]["_id"]);
+              if (res.data[0].filename === "") {
+                navigate('/company/uploadDocuments');
+              } else {
+                navigate('/companyLandingPage');
+              }
+            }).catch(err => {
+              console.log(err);
+            })
+          }}>
             <div className="flex flex-col gap-4">
               <input
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
                 className="w-96 border-2 py-1 px-2 rounded-md  "
+                name="email"
               />
               <input
                 type="password"
                 placeholder="Password"
                 className="w-96 border-2 py-1 px-2 rounded-md"
+                name="password"
               />
             </div>
             <div className="flex gap-8">

@@ -10,6 +10,8 @@ import AdminDashboard from "./components/Admin/AdminDashboard";
 import Unapproved from "./components/Admin/Unapproved";
 import Approved from "./components/Admin/Approved";
 import SupplierProfile from "./components/Supplier/SupplierProfile";
+import CompanyLandingPage from "./components/Company/CompanyLandingPage";
+import UploadCompanyDocuments from "./components/Company/UploadCompanyDocuments";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path ="/unapproved" element = {<Unapproved/>}></Route>
         <Route path ="/approved" element = {<Approved/>}></Route>
         <Route path="/supplier/profile" element={<SupplierProfile />}></Route>
+        <Route path="/companyLandingPage" element={<CompanyLandingPage/>}></Route>
+        <Route path="/company/uploadDocuments" element={<UploadCompanyDocuments />}></Route>
       </Routes>
     </Router>
   );
