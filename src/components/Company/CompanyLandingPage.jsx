@@ -118,14 +118,16 @@ function CompanyLandingPage() {
           }}
         >
           <input name="id" className="hidden" value={value["_id"]} />
-          <div className="flex flex-col items-start justify-evenly h-full">
+          <div className="flex flex-col items-start justify-evenly h-full basis-1/4">
             <h1 className="font-bold">Supplier Data</h1>
             <p>Name: {value["name"]}</p>
             <p>Email: {value["email"]}</p>
             <p>Phone: {value["phone"]}</p>
           </div>
-          <div className="w-1 bg-[#FCBD16] h-[200px]"></div>
-          <div className="flex flex-col items-start justify-evenly h-full">
+          <div className="basis-1/4 flex justify-center">
+            <div className="bg-[#FCBD16] h-[200px] w-1"></div>
+          </div>
+          <div className="flex flex-col items-start justify-evenly h-full basis-1/4">
             <div>
               <p>Resource Type: {value["resourceType"]}</p>
             </div>
@@ -136,20 +138,17 @@ function CompanyLandingPage() {
               <p>Availability: {value["availability"]}</p>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-between h-[200px]">
-            <div className="flex items-center">
+          <div className="flex flex-col items-end justify-between h-[200px] basis-1/4">
+            <div className="flex items-center gap-3">
               Rating:
-              {ratingStarsFunc(value["rating"])}
+              <div className="flex items-center gap-1">{ratingStarsFunc(value["rating"])}</div>
             </div>
             <button
               className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
               onClick={(e) => {
                 e.preventDefault();
                 console.log(value["_id"]);
-                localStorage.setItem(
-                  "company-sup-view",
-                  value["_id"]
-                );
+                localStorage.setItem("company-sup-view", value["_id"]);
                 navigate("/company/sup");
               }}
             >

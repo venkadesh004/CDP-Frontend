@@ -4,6 +4,7 @@ import logo from "../../assets/logo1.png";
 import { Link } from "react-router-dom";
 const Unapproved = () => {
   const [unApproved, setUnapproved] = useState([]);
+  const [editState, setEditState] = useState(false);
 
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/admin/getUnapprovedData").then((res) => {
@@ -96,7 +97,7 @@ const Unapproved = () => {
                       <a
                         className="px-4 py-2 bg-[#FCBD16] rounded-md font-semibold"
                         target="_blank"
-                        href={`http://127.0.0.1:5000/supplier/downloadFiles/${supplier._id}`}
+                        href={`http://127.0.0.1:5000/admin/downloadFiles/${supplier._id}`}
                       >
                         Download
                       </a>
@@ -162,6 +163,7 @@ const Unapproved = () => {
                     rows="7"
                     placeholder="Comment"
                     className="px-5 py-2 rounded-md"
+                    disabled={editState}
                   ></textarea>
                   <button
                     type="submit"
