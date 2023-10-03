@@ -12,6 +12,9 @@ import Approved from "./components/Admin/Approved";
 import SupplierProfile from "./components/Supplier/SupplierProfile";
 import CompanyLandingPage from "./components/Company/CompanyLandingPage";
 import UploadCompanyDocuments from "./components/Company/UploadCompanyDocuments";
+import CompanySupplierProfile from "./components/Company/CompanySupplierProfile";
+import Status from "./components/Supplier/Status";
+import CompStatus from "./components/Company/CompStatus";
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
         <Route path="/supplier/profile" element={<SupplierProfile />}></Route>
         <Route path="/companyLandingPage" element={<CompanyLandingPage/>}></Route>
         <Route path="/company/uploadDocuments" element={<UploadCompanyDocuments />}></Route>
+        <Route path="/company/sup" element={<CompanySupplierProfile />}></Route>
+        <Route path="/status" element={<Status />}></Route>
+        <Route path="/comp/status" element={<CompStatus />}></Route>
       </Routes>
     </Router>
   );

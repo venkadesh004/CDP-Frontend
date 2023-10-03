@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo1.png";
 import { Link } from "react-router-dom";
+
 import axios from "axios";
 
-const SupplierLandingPage = () => {
+function CompStatus() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:5000/supplier/getRequests/" +
-          localStorage.getItem("supID")
+        "http://127.0.0.1:5000/company/getAcceptedStatus/" +
+          localStorage.getItem("compID")
       )
       .then((result) => {
         console.log(result.data);
@@ -31,11 +32,11 @@ const SupplierLandingPage = () => {
             <p name="email">Email: {value["email"]}</p>
             <p>Phone: {value["phone"]}</p>
           </div>
-          <div className="flex flex-col items-center justify-between h-[90%]">
+          <div className="flex flex-col items-center justify-between h-[70%]">
             <a
               className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
               target="_blank"
-              href={`http://127.0.0.1:5000/company/downloadCompanyFile/${value["_id"]}`}
+              href={`http://127.0.0.1:5000/company/downloadCompanyFile/${localStorage.getItem("compID")}`}
             >
               Download
             </a>
@@ -43,19 +44,19 @@ const SupplierLandingPage = () => {
               className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
               onClick={(e) => {
                 e.preventDefault();
-                console.log(value["email"]);
                 console.log(localStorage.getItem("supID"));
+                console.log(value["email"]);
                 axios
-                  .put("http://127.0.0.1:5000/supplier/acceptContract", {
-                    _id: localStorage.getItem("supID"),
-                    compMail: value["email"],
+                  .put("http://127.0.0.1:5000/company/contractComplete", {
+                    _id: value["_id"],
+                    compMail: localStorage.getItem("compMail"),
                   })
                   .then((output) => {
                     console.log(output);
                     axios
                       .get(
-                        "http://127.0.0.1:5000/supplier/getRequests/" +
-                          localStorage.getItem("supID")
+                        "http://127.0.0.1:5000/company/getAcceptedStatus/" +
+                          localStorage.getItem("compID")
                       )
                       .then((result) => {
                         console.log(result.data);
@@ -70,13 +71,7 @@ const SupplierLandingPage = () => {
                   });
               }}
             >
-              Accept
-            </button>
-            <button
-              className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
-              type="submit"
-            >
-              Reject
+              Completed
             </button>
           </div>
         </form>
@@ -92,12 +87,6 @@ const SupplierLandingPage = () => {
           <h1 className="">SUPPLYCHAIN</h1>
         </div>
         <div className="flex items-center gap-9">
-          <Link to="/status" className="text-lg font-semibold">
-            Status
-          </Link>
-          <Link to="/supplier/profile" className="text-lg font-semibold">
-            Profile
-          </Link>
           <Link
             className="text-lg font-semibold bg-[#FCBD16] px-4 py-2 rounded-full"
             to="/signUp"
@@ -111,6 +100,6 @@ const SupplierLandingPage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default SupplierLandingPage;
+export default CompStatus;
