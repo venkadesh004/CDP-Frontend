@@ -41,6 +41,8 @@ const CustomerSignIn = (props) => {
             }).then(res => {
               console.log(res);
               window.localStorage.setItem("compID", res.data[0]["_id"]);
+              window.localStorage.setItem("compMail", res.data[0]["email"]);
+              window.localStorage.setItem("compName", res.data[0]["name"]);
               if (res.data[0].filename === "") {
                 navigate('/company/uploadDocuments');
               } else {

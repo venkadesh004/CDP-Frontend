@@ -13,7 +13,9 @@ function SupplierProfile() {
   const [material, setMaterial] = useState("");
   const [data, setData] = useState([]);
   const [rating, setRating] = useState(0);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     axios
       .get(
@@ -27,26 +29,46 @@ function SupplierProfile() {
         setAvailability(res.data[0]["availability"]);
         setMaterial(res.data[0]["resourceType"]);
         setRating(res.data[0]["rating"]);
+        setComments(res.data[0]["comments"]);
         setLoading(false);
         console.log(data);
       });
   }, []);
 
   var stars = [0, 0, 0, 0, 0];
-  for(var i=0; i<rating; i++) {
+  for (var i = 0; i < rating; i++) {
     stars[i] = 1;
   }
   const ratingStars = stars.map((value, index) => {
     if (value === 1) {
-      return <img key={index} src={ColorStar} alt="" className="w-[15px] h-[15px]" />;
+      return (
+        <img key={index} src={ColorStar} alt="" className="w-[15px] h-[15px]" />
+      );
     } else {
-      return <img key={index} src={UnColorStar} alt="" className="w-[15px] h-[15px]" />;
+      return (
+        <img
+          key={index}
+          src={UnColorStar}
+          alt=""
+          className="w-[15px] h-[15px]"
+        />
+      );
     }
   });
 
   if (loading) {
     return <h1>Loading...</h1>;
   } else {
+    var getComments = comments.map((value, index) => {
+      return (
+        <div className="w-full mt-3">
+          <h1 className="font-bold text-[20px]">{value["name"]}</h1>
+          <h2 className="text-[10px]">{value["email"]}</h2>
+          <p className="mt-1">{value["comment"]}</p>
+        </div>
+      );
+    });
+
     return (
       <div className="w-full flex flex-col items-center">
         <nav className="w-full flex justify-between px-12 pt-3 h-[13vh]">
@@ -152,9 +174,13 @@ function SupplierProfile() {
                 Rating:
                 {ratingStars}
               </div>
-              <button className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl">
+              <a
+                className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
+                target="_blank"
+                href={`http://127.0.0.1:5000/company/downloadFiles/${localStorage.getItem("supID")}`}
+              >
                 Download
-              </button>
+              </a>
               <button
                 className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
                 type="submit"
@@ -163,7 +189,10 @@ function SupplierProfile() {
               </button>
             </div>
           </form>
-          <div></div>
+          <div>
+            <h1 className="font-bold mt-3">Comments:</h1>
+            {getComments}
+          </div>
         </div>
       </div>
     );
