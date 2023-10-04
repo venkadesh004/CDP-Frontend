@@ -15,6 +15,8 @@ import UploadCompanyDocuments from "./components/Company/UploadCompanyDocuments"
 import CompanySupplierProfile from "./components/Company/CompanySupplierProfile";
 import Status from "./components/Supplier/Status";
 import CompStatus from "./components/Company/CompStatus";
+import ApprovedCompanies from "./components/Admin/ApprovedCompanies";
+import UnapprovedCompanies from "./components/Admin/UnapprovedCompanies";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/company/sup" element={<CompanySupplierProfile />}></Route>
         <Route path="/status" element={<Status />}></Route>
         <Route path="/comp/status" element={<CompStatus />}></Route>
+        <Route path="/approved/comp" element={<ApprovedCompanies />}></Route>
+        <Route path="/unapproved/comp" element={<UnapprovedCompanies />}></Route>
       </Routes>
     </Router>
   );

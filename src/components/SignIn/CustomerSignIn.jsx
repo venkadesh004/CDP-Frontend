@@ -43,10 +43,12 @@ const CustomerSignIn = (props) => {
               window.localStorage.setItem("compID", res.data[0]["_id"]);
               window.localStorage.setItem("compMail", res.data[0]["email"]);
               window.localStorage.setItem("compName", res.data[0]["name"]);
-              if (res.data[0].filename === "") {
-                navigate('/company/uploadDocuments');
-              } else {
+              if((res.data[0].filename === "") || (res.data[0]["companyID"] === "None" && res.data[0]["authorizer"] !== "")){
+                navigate("/company/uploadDocuments")
+              } else if (res.data[0]["companyID"] !== "None" && res.data[0]["authorizer"] !== "") {
                 navigate('/companyLandingPage');
+              } else {
+                navigate("/wait")
               }
             }).catch(err => {
               console.log(err);

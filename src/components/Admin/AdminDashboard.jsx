@@ -32,6 +32,18 @@ const AdminDashboard = () => {
             Approved suppliers
           </Link>
           <Link
+            to="/unapproved/comp"
+            className="text-center w-1/4 bg-[#FCBD16] px-7 py-2 font-semibold rounded-md tracking-wide"
+          >
+            Unapproved Companies
+          </Link>
+          <Link
+            to="/approved/comp"
+            className="text-center w-1/4 bg-[#FCBD16] px-7 py-2 font-semibold rounded-md tracking-wide"
+          >
+            Approved Companies
+          </Link>
+          <Link
             onClick={() => {
               sessionStorage.removeItem("adminName");
               sessionStorage.removeItem("adminId");

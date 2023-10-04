@@ -46,7 +46,7 @@ const UploadCompanyDocuments = () => {
                     headers: {"Content-Type": "multipart/form-data"}
                   }).then(res => {
                     console.log(res);
-                    navigate('/companyLandingPage');
+                    navigate('/wait');
                   }).catch(err => {
                     console.log(err);
                   })

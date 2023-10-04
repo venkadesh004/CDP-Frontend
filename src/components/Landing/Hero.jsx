@@ -33,7 +33,7 @@ const Hero = () => {
               Supplier Registeration
             </Link>
           </div>
-        </div>
+        </div>  
         <div className="relative">
           <div className="z-10">
             <Player src={worker} loop autoplay  />
