@@ -2,13 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import logo from "../../assets/logo1.png";
 import { Link } from "react-router-dom";
+
+import { Player } from "@lottiefiles/react-lottie-player";
+import loadingLottie from "../../assets/loadingLottie.json";
+
 const Approved = () => {
-    const [approved , setApproved] = useState([]);
-    useEffect(()=>{
-        axios.get("http://127.0.0.1:5000/admin/getApprovedData").then((res)=>{
-            setApproved(res.data)
-        });
-    },[])
+  const [loading, setLoading] = useState(false);
+  const [approved, setApproved] = useState([]);
+  useEffect(() => {
+    setLoading(true)
+    axios.get("http://127.0.0.1:5000/admin/getApprovedData").then((res) => {
+      setApproved(res.data);
+      setLoading(false)
+    }).catch(()=>{
+      setLoading(true)
+    })
+  }, []);
 
   return (
     <div className="flex ">
@@ -26,37 +35,45 @@ const Approved = () => {
             Back
           </Link>
         </div>
-
-        <ul className="flex flex-col gap-9  w-[75%] ml-9 pb-9">
-          {approved.map((supplier) => (
-            <li className="text-black/60 ">
-              <div className="w-full h-[170px] bg-[#FCBD16]  rounded-xl flex items-center justify-between p-9">
-                <div className="flex items-start justify-evenly flex-col  h-full">
-                  <h1 className="font-bold text-xl">Name : {supplier.name}</h1>
-                  <h1 className="font-bold text-xl">
-                    Email : {supplier.email}
-                  </h1>
-                  <h1 className="font-bold text-xl">
-                    Phone : {supplier.phone}
-                  </h1>
+        {loading && (
+          <div className="w-full h-screen flex items-center justify-center  ">
+            <Player src={loadingLottie} loop autoplay className="h-96" />
+          </div>
+        )}
+        {!loading && (
+          <ul className="flex flex-col gap-9  w-[75%] ml-9 pb-9">
+            {approved.map((supplier) => (
+              <li className="text-black/60 ">
+                <div className="w-full h-[170px] bg-[#FCBD16]  rounded-xl flex items-center justify-between p-9">
+                  <div className="flex items-start justify-evenly flex-col  h-full">
+                    <h1 className="font-bold text-xl">
+                      Name : {supplier.name}
+                    </h1>
+                    <h1 className="font-bold text-xl">
+                      Email : {supplier.email}
+                    </h1>
+                    <h1 className="font-bold text-xl">
+                      Phone : {supplier.phone}
+                    </h1>
+                  </div>
+                  <div className="flex flex-col gap-5">
+                    {supplier.filename !== "" ? (
+                      <a
+                        className="px-4 py-2 bg-white/20 rounded-md font-semibold"
+                        target="_blank"
+                        href={`http://127.0.0.1:5000/admin/downloadFiles/${supplier._id}`}
+                      >
+                        Download
+                      </a>
+                    ) : (
+                      <p className="cursor-pointer">No Document</p>
+                    )}
+                  </div>
                 </div>
-                <div className="flex flex-col gap-5">
-                  {supplier.filename !== "" ? (
-                    <a
-                      className="px-4 py-2 bg-white/20 rounded-md font-semibold"
-                      target="_blank"
-                      href={`http://127.0.0.1:5000/admin/downloadFiles/${supplier._id}`}
-                    >
-                      Download
-                    </a>
-                  ) : (
-                    <p className="cursor-pointer">No Document</p>
-                  )}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div className="w-[25%] bg-[#FCBD16] h-screen fixed right-0"></div>

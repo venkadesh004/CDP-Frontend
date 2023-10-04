@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import logo from "../../assets/logo1.png";
 import { Link } from "react-router-dom";
-
+import { Player } from "@lottiefiles/react-lottie-player";
+import loadingLottie from "../../assets/loadingLottie.json";
 function UnapprovedCompanies() {
   const [unApproved, setUnapproved] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://127.0.0.1:5000/admin/getUnapprovedCompData")
       .then((res) => {
         console.log(res);
         setUnapproved(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(true);
       });
   }, []);
 
@@ -65,17 +71,17 @@ function UnapprovedCompanies() {
     return (
       <div>
         <li className="text-black/60 ">
-          <div className="w-full h-[300px] bg-[#FCBD16]/50  rounded-xl flex items-center justify-between p-9">
-            <div className="flex flex-col items-start justify-evenly h-full">
-              <div className="flex items-start justify-evenly flex-col h-full">
+          <div className="w-full h-[275px] bg-[#FCBD16]  rounded-xl flex items-start justify-between p-9">
+            <div className="flex flex-col items-start justify-evenly h-3/4  ">
+              <div className="flex items-start justify-evenly flex-col h-full mb-9">
                 <h1 className="font-bold text-xl">Name : {company.name}</h1>
                 <h1 className="font-bold text-xl">Email : {company.email}</h1>
                 <h1 className="font-bold text-xl">Phone : {company.phone}</h1>
               </div>
-              <div className="flex flex-col gap-5">
+              <div className="">
                 {company.filename !== "" ? (
                   <a
-                    className="px-4 py-2 bg-[#FCBD16] rounded-md font-semibold"
+                    className="px-4 py-2 bg-white/20 rounded-md font-semibold"
                     target="_blank"
                     href={`http://127.0.0.1:5000/admin/downloadCompanyFiles/${company._id}`}
                   >
@@ -87,7 +93,7 @@ function UnapprovedCompanies() {
               </div>
             </div>
             <form
-              className="flex flex-col items-start justify-evenly"
+              className="flex flex-col items-start justify-evenly gap-3"
               onSubmit={(e) => {
                 e.preventDefault();
                 if (e.currentTarget.elements.approve.value === "approve") {
@@ -105,48 +111,42 @@ function UnapprovedCompanies() {
               }}
             >
               <div className="flex items-center justify-start">
-                {/* <button
-                  className="px-4 py-2 bg-white/20 rounded-md font-semibold"
-                  onClick={() => approve(company["_id"])}
-                >
-                  Approve
-                </button>
-                <button
-                  className="px-4 py-2 bg-white/20 rounded-md font-semibold"
-                  onClick={() => approve(company["_id"])}
-                >
-                  Approve
-                </button> */}
-                <input
-                  type="radio"
-                  name="approve"
-                  value="approve"
-                  className=""
-                  id="approve-radio"
-                />
-                <label htmlFor="approve-radio" className="">
-                  Approve
-                </label>
-                <input
-                  type="radio"
-                  name="approve"
-                  className="ml-2"
-                  value="reject"
-                  id="reject-radio"
-                />
-                <label htmlFor="reject-radio">Reject</label>
+                <div className="flex gap-3">
+                  <div className="flex gap-1">
+                    <input
+                      type="radio"
+                      name="approve"
+                      value="approve"
+                      className=""
+                      id="approve-radio"
+                    />
+                    <label htmlFor="approve-radio" className="">
+                      Approve
+                    </label>
+                  </div>
+                  <div className="flex gap-1">
+                    <input
+                      type="radio"
+                      name="approve"
+                      className="ml-2"
+                      value="reject"
+                      id="reject-radio"
+                    />
+                    <label htmlFor="reject-radio">Reject</label>
+                  </div>
+                </div>
               </div>
               <textarea
                 name="comments"
                 id=""
                 cols="100"
-                rows="7"
+                rows="4"
                 placeholder="Comment"
-                className="px-5 py-2 rounded-md"
+                className="px-5 py-2 rounded-md focus:outline-[#FCBD16]/20 bg-white/30 text-black placeholder:text-black/70"
               ></textarea>
               <button
                 type="submit"
-                className="px-4 py-2 bg-[#FCBD16] rounded-md font-semibold mt-2"
+                className="px-4 py-2 bg-white/20 rounded-md font-semibold mt-2"
               >
                 Send
               </button>
@@ -173,8 +173,14 @@ function UnapprovedCompanies() {
             Back
           </Link>
         </div>
-
-        <ul className="flex flex-col gap-9  w-[90%] ml-9 pb-9">{datas}</ul>
+        {loading && (
+          <div className="w-full h-screen flex items-center justify-center  ">
+            <Player src={loadingLottie} loop autoplay className="h-96" />
+          </div>
+        )}
+        {!loading && (
+          <ul className="flex flex-col gap-9  w-[90%] ml-9 pb-9">{datas}</ul>
+        )}
       </div>
 
       {/* <div className="w-[25%] bg-[#FCBD16] h-screen fixed right-0"></div> */}
