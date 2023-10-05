@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import logo from "../../assets/logo1.png";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function Status() {
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:5000/supplier/getAcceptedStatus/" +
+        "https://cdp-backend.onrender.com/supplier/getAcceptedStatus/" +
           localStorage.getItem("supID")
       )
       .then((result) => {
@@ -35,7 +35,7 @@ function Status() {
             <a
               className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
               target="_blank"
-              href={`http://127.0.0.1:5000/company/downloadCompanyFile/${value["_id"]}`}
+              href={`https://cdp-backend.onrender.com/company/downloadCompanyFile/${value["_id"]}`}
             >
               Download
             </a>
@@ -55,17 +55,24 @@ function Status() {
         <div className="flex items-center gap-9">
           <Link
             className="text-lg font-semibold bg-[#FCBD16] px-4 py-2 rounded-full"
+            to="/supplierLandingPage"
+          >
+            Back
+          </Link>
+          <Link
+            className="text-lg font-semibold bg-[#FCBD16] px-4 py-2 rounded-full"
             to="/signUp"
           >
             Logout
           </Link>
         </div>
       </nav>
-      <div className='w-full flex flex-col items-center mt-10'>
-        {requestDatas}
+      <div className="w-full flex flex-col items-center mt-10">
+        {data.length === 0 && <div>No Data</div>}
+        {data.length !== 0 && requestDatas}
       </div>
     </div>
-  )
+  );
 }
 
-export default Status
+export default Status;

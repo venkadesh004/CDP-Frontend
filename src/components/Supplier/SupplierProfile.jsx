@@ -19,7 +19,7 @@ function SupplierProfile() {
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:5000/supplier/getSupplierID/" +
+        "https://cdp-backend.onrender.com/supplier/getSupplierID/" +
           window.localStorage.getItem("supID")
       )
       .then((res) => {
@@ -83,6 +83,12 @@ function SupplierProfile() {
             >
               Logout
             </Link>
+            <Link
+              className="text-lg font-semibold bg-[#FCBD16] px-4 py-2 rounded-full"
+              to="/supplierLandingPage"
+            >
+              Back
+            </Link>
           </div>
         </nav>
         <div className="w-[95%] bg-[#FCBD16]/20 p-10">
@@ -94,21 +100,20 @@ function SupplierProfile() {
                 setEditState(false);
               } else {
                 setEditState(true);
-                console.log(e.currentTarget.elements.resourceType.value);
-                console.log(e.currentTarget.elements.location.value);
-                console.log(e.currentTarget.elements.availability.value);
-                console.log(window.localStorage.getItem("supID"));
 
                 axios
-                  .put("http://127.0.0.1:5000/supplier/editProfile", {
-                    _id: window.localStorage.getItem("supID"),
-                    resourceType: e.currentTarget.elements.resourceType.value,
-                    location: e.currentTarget.elements.location.value,
-                    availability: e.currentTarget.elements.availability.value,
-                    rating: 0,
-                    comments: [],
-                    status: [],
-                  })
+                  .put(
+                    "https://cdp-backend.onrender.com/supplier/editProfile",
+                    {
+                      _id: window.localStorage.getItem("supID"),
+                      resourceType: e.currentTarget.elements.resourceType.value,
+                      location: e.currentTarget.elements.location.value,
+                      availability: e.currentTarget.elements.availability.value,
+                      rating: 0,
+                      comments: [],
+                      status: [],
+                    }
+                  )
                   .then((res) => {
                     console.log(res);
                   })
@@ -177,7 +182,9 @@ function SupplierProfile() {
               <a
                 className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
                 target="_blank"
-                href={`http://127.0.0.1:5000/company/downloadFiles/${localStorage.getItem("supID")}`}
+                href={`https://cdp-backend.onrender.com/company/downloadFiles/${localStorage.getItem(
+                  "supID"
+                )}`}
               >
                 Download
               </a>

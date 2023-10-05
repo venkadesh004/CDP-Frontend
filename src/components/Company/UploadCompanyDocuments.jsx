@@ -38,7 +38,7 @@ const UploadCompanyDocuments = () => {
                   const data = new FormData(e.target);
                   await axios({
                     method: "post",
-                    url: "http://127.0.0.1:5000/company/fileUpload",
+                    url: "https://cdp-backend.onrender.com/company/fileUpload",
                     data: {
                       file: data.get('file'),
                       _id: data.get('id')
@@ -79,7 +79,7 @@ const UploadCompanyDocuments = () => {
                   Back
                 </button>
               </form>
-              {/* <a target="_blank" href={`http://127.0.0.1:5000/supplier/downloadFiles/${window.localStorage.getItem("compID")}`}>Download Last Upload</a> */}
+              {/* <a target="_blank" href={`https://cdp-backend.onrender.com/supplier/downloadFiles/${window.localStorage.getItem("compID")}`}>Download Last Upload</a> */}
             </div>
           </div>
         </div>

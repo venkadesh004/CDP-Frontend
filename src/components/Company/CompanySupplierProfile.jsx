@@ -13,7 +13,7 @@ function CompanySupplierProfile() {
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:5000/supplier/getSupplierID/" +
+        "https://cdp-backend.onrender.com/supplier/getSupplierID/" +
           localStorage.getItem("company-sup-view")
       )
       .then((result) => {
@@ -121,7 +121,7 @@ function CompanySupplierProfile() {
             <a
               className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
               target="_blank"
-              href={`http://127.0.0.1:5000/company/downloadFiles/${data["_id"]}`}
+              href={`https://cdp-backend.onrender.com/company/downloadFiles/${data["_id"]}`}
             >
               Download
             </a>
@@ -138,12 +138,12 @@ function CompanySupplierProfile() {
                 };
                 console.log(sendJson);
                 axios
-                  .put("http://127.0.0.1:5000/company/addComment", sendJson)
+                  .put("https://cdp-backend.onrender.com/company/addComment", sendJson)
                   .then((output) => {
                     console.log(output);
                     axios
                       .get(
-                        "http://127.0.0.1:5000/supplier/getSupplierID/" +
+                        "https://cdp-backend.onrender.com/supplier/getSupplierID/" +
                           localStorage.getItem("company-sup-view")
                       )
                       .then((result) => {

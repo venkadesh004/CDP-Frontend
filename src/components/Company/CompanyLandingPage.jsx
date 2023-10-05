@@ -20,7 +20,7 @@ function CompanyLandingPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:5000/company/getSuppliers").then((res) => {
+    axios.get("https://cdp-backend.onrender.com/company/getSuppliers").then((res) => {
       console.log(res);
       setData(res.data);
     });
@@ -96,7 +96,7 @@ function CompanyLandingPage() {
 
   var dataElements = dataFilter().map((value, index) => {
     return (
-      <div className="w-[95%] bg-[#FCBD16]/20 p-10 mt-5">
+      <div className="w-[95%] bg-[#FCBD16] rounded-xl p-10 mt-5">
         <form
           className="flex items-center justify-between h-[150px]"
           onSubmit={(e) => {
@@ -104,7 +104,7 @@ function CompanyLandingPage() {
             console.log(e.currentTarget.elements.id.value);
             console.log(localStorage.getItem("compMail"));
             axios
-              .put("http://127.0.0.1:5000/company/sendRequest", {
+              .put("https://cdp-backend.onrender.com/company/sendRequest", {
                 _id: e.currentTarget.elements.id.value,
                 compMail: localStorage.getItem("compMail"),
               })
@@ -144,7 +144,7 @@ function CompanyLandingPage() {
               <div className="flex items-center gap-1">{ratingStarsFunc(value["rating"])}</div>
             </div>
             <button
-              className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
+              className="w-[100px] bg-white/20 p-2 rounded-2xl"
               onClick={(e) => {
                 e.preventDefault();
                 console.log(value["_id"]);
@@ -155,14 +155,14 @@ function CompanyLandingPage() {
               View
             </button>
             <a
-              className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
+              className="w-[100px] bg-white/20 p-2 rounded-2xl"
               target="_blank"
-              href={`http://127.0.0.1:5000/company/downloadFiles/${value["_id"]}`}
+              href={`https://cdp-backend.onrender.com/company/downloadFiles/${value["_id"]}`}
             >
               Download
             </a>
             <button
-              className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
+              className="w-[100px] bg-white/20 p-2 rounded-2xl"
               type="submit"
             >
               Request

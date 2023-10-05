@@ -10,7 +10,7 @@ function UnapprovedCompanies() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://127.0.0.1:5000/admin/getUnapprovedCompData")
+      .get("https://cdp-backend.onrender.com/admin/getUnapprovedCompData")
       .then((res) => {
         console.log(res);
         setUnapproved(res.data);
@@ -25,14 +25,14 @@ function UnapprovedCompanies() {
     console.log(id);
     console.log(window.sessionStorage.getItem("adminName"));
     axios
-      .put("http://127.0.0.1:5000/admin/allowCompanies", {
+      .put("https://cdp-backend.onrender.com/admin/allowCompanies", {
         _id: id,
         username: window.sessionStorage.getItem("adminName"),
       })
       .then(async (res) => {
         console.log(res);
         await axios
-          .get("http://127.0.0.1:5000/admin/getUnapprovedCompData")
+          .get("https://cdp-backend.onrender.com/admin/getUnapprovedCompData")
           .then((res) => {
             console.log(res);
             setUnapproved(res.data);
@@ -48,7 +48,7 @@ function UnapprovedCompanies() {
     console.log(window.sessionStorage.getItem("adminName"));
 
     axios
-      .put("http://127.0.0.1:5000/admin/denyCompanies", {
+      .put("https://cdp-backend.onrender.com/admin/denyCompanies", {
         _id: id,
         comments: comments,
         username: window.sessionStorage.getItem("adminName"),
@@ -56,7 +56,7 @@ function UnapprovedCompanies() {
       .then(async (res) => {
         console.log(res);
         await axios
-          .get("http://127.0.0.1:5000/admin/getUnapprovedCompData")
+          .get("https://cdp-backend.onrender.com/admin/getUnapprovedCompData")
           .then((res) => {
             console.log(res);
             setUnapproved(res.data);
@@ -83,7 +83,7 @@ function UnapprovedCompanies() {
                   <a
                     className="px-4 py-2 bg-white/20 rounded-md font-semibold"
                     target="_blank"
-                    href={`http://127.0.0.1:5000/admin/downloadCompanyFiles/${company._id}`}
+                    href={`https://cdp-backend.onrender.com/admin/downloadCompanyFiles/${company._id}`}
                   >
                     Download
                   </a>

@@ -10,7 +10,7 @@ function CompStatus() {
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:5000/company/getAcceptedStatus/" +
+        "https://cdp-backend.onrender.com/company/getAcceptedStatus/" +
           localStorage.getItem("compID")
       )
       .then((result) => {
@@ -36,7 +36,9 @@ function CompStatus() {
             <a
               className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
               target="_blank"
-              href={`http://127.0.0.1:5000/company/downloadCompanyFile/${localStorage.getItem("compID")}`}
+              href={`https://cdp-backend.onrender.com/company/downloadCompanyFile/${localStorage.getItem(
+                "compID"
+              )}`}
             >
               Download
             </a>
@@ -47,15 +49,18 @@ function CompStatus() {
                 console.log(localStorage.getItem("supID"));
                 console.log(value["email"]);
                 axios
-                  .put("http://127.0.0.1:5000/company/contractComplete", {
-                    _id: value["_id"],
-                    compMail: localStorage.getItem("compMail"),
-                  })
+                  .put(
+                    "https://cdp-backend.onrender.com/company/contractComplete",
+                    {
+                      _id: value["_id"],
+                      compMail: localStorage.getItem("compMail"),
+                    }
+                  )
                   .then((output) => {
                     console.log(output);
                     axios
                       .get(
-                        "http://127.0.0.1:5000/company/getAcceptedStatus/" +
+                        "https://cdp-backend.onrender.com/company/getAcceptedStatus/" +
                           localStorage.getItem("compID")
                       )
                       .then((result) => {
@@ -87,6 +92,12 @@ function CompStatus() {
           <h1 className="">SUPPLYCHAIN</h1>
         </div>
         <div className="flex items-center gap-9">
+          <Link
+            className="text-lg font-semibold bg-[#FCBD16] px-4 py-2 rounded-full"
+            to="/companyLandingPage"
+          >
+            Back
+          </Link>
           <Link
             className="text-lg font-semibold bg-[#FCBD16] px-4 py-2 rounded-full"
             to="/signUp"

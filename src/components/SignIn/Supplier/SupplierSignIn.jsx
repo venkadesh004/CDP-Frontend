@@ -17,7 +17,7 @@ const SupplierSignIn = (props) => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    axios.post("http://127.0.0.1:5000/supplier/getSupplier" , data).then((res)=>{
+    axios.post("https://cdp-backend.onrender.com/supplier/getSupplier" , data).then((res)=>{
       console.log(res);
       console.log(res.data[0]["_id"]);
       window.localStorage.setItem("supID", res.data[0]["_id"]);

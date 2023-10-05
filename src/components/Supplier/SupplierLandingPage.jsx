@@ -9,7 +9,7 @@ const SupplierLandingPage = () => {
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:5000/supplier/getRequests/" +
+        "https://cdp-backend.onrender.com/supplier/getRequests/" +
           localStorage.getItem("supID")
       )
       .then((result) => {
@@ -35,7 +35,7 @@ const SupplierLandingPage = () => {
             <a
               className="w-[100px] bg-[#FCBD16] p-2 rounded-2xl"
               target="_blank"
-              href={`http://127.0.0.1:5000/company/downloadCompanyFile/${value["_id"]}`}
+              href={`https://cdp-backend.onrender.com/company/downloadCompanyFile/${value["_id"]}`}
             >
               Download
             </a>
@@ -46,7 +46,7 @@ const SupplierLandingPage = () => {
                 console.log(value["email"]);
                 console.log(localStorage.getItem("supID"));
                 axios
-                  .put("http://127.0.0.1:5000/supplier/acceptContract", {
+                  .put("https://cdp-backend.onrender.com/supplier/acceptContract", {
                     _id: localStorage.getItem("supID"),
                     compMail: value["email"],
                   })
@@ -54,7 +54,7 @@ const SupplierLandingPage = () => {
                     console.log(output);
                     axios
                       .get(
-                        "http://127.0.0.1:5000/supplier/getRequests/" +
+                        "https://cdp-backend.onrender.com/supplier/getRequests/" +
                           localStorage.getItem("supID")
                       )
                       .then((result) => {
@@ -106,8 +106,14 @@ const SupplierLandingPage = () => {
           </Link>
         </div>
       </nav>
+
       <div className="w-full flex flex-col items-center mt-10">
-        {requestDatas}
+      {data.length === 0 && (
+        <div>No request</div>
+        )}
+        {data.length !== 0 && requestDatas
+        }
+        
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ function ApprovedCompanies() {
   const [approved, setApproved] = useState([]);
   useEffect(() => {
     setLoading(true)
-    axios.get("http://127.0.0.1:5000/admin/getApprovedCompData").then((res) => {
+    axios.get("https://cdp-backend.onrender.com/admin/getApprovedCompData").then((res) => {
       setApproved(res.data);
       setLoading(false)
     }).catch(()=>{
@@ -58,7 +58,7 @@ function ApprovedCompanies() {
                       <a
                         className="px-4 py-2 bg-white/20 rounded-md font-semibold"
                         target="_blank"
-                        href={`http://127.0.0.1:5000/admin/downloadCompanyFiles/${company._id}`}
+                        href={`https://cdp-backend.onrender.com/admin/downloadCompanyFiles/${company._id}`}
                       >
                         Download
                       </a>

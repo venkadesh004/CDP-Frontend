@@ -14,7 +14,7 @@ const SupplierSignUp = (props) => {
   } = useForm();
   const onSubmit = async (data) => {
     const response = await axios
-      .post("http://127.0.0.1:5000/supplier/addSupplier", data)
+      .post("https://cdp-backend.onrender.com/supplier/addSupplier", data)
       .then((res) => {
         setMessage(res.data);
         console.log(res.data);

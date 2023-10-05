@@ -14,7 +14,7 @@ const Login = (props) => {
   const onSubmit = async (data) => {
     console.log(data);
     axios
-      .post("http://127.0.0.1:5000/admin/getAdmin", data)
+      .post("https://cdp-backend.onrender.com/admin/getAdmin", data)
       .then((res) => {
         console.log(res);
         window.sessionStorage.setItem("adminId", res.data[0]["_id"]);

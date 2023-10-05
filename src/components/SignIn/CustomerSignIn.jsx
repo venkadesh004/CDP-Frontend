@@ -15,7 +15,7 @@ const CustomerSignIn = (props) => {
 
   const onSubmit = async (data) => {
     await axios
-      .post("http://127.0.0.1:5000/company/addCompany", data)
+      .post("https://cdp-backend.onrender.com/company/addCompany", data)
       .then((res) => {
         setMessage(res.data);
         console.log(res.data);
@@ -35,7 +35,7 @@ const CustomerSignIn = (props) => {
             console.log(e.currentTarget.elements.email.value);
             console.log(e.currentTarget.elements.password.value);
 
-            axios.post("http://127.0.0.1:5000/company/getCompany", {
+            axios.post("https://cdp-backend.onrender.com/company/getCompany", {
               "email": e.currentTarget.elements.email.value,
               "password": e.currentTarget.elements.password.value
             }).then(res => {

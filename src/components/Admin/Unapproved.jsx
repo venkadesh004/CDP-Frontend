@@ -11,7 +11,7 @@ const Unapproved = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://127.0.0.1:5000/admin/getUnapprovedData").then((res) => {
+    axios.get("https://cdp-backend.onrender.com/admin/getUnapprovedData").then((res) => {
       console.log(res);
       setUnapproved(res.data);
       setLoading(false);
@@ -24,14 +24,14 @@ const Unapproved = () => {
     console.log(id);
     console.log(window.sessionStorage.getItem("adminName"));
     axios
-      .put("http://127.0.0.1:5000/admin/allowSuppliers", {
+      .put("https://cdp-backend.onrender.com/admin/allowSuppliers", {
         _id: id,
         username: window.sessionStorage.getItem("adminName"),
       })
       .then(async (res) => {
         console.log(res);
         await axios
-          .get("http://127.0.0.1:5000/admin/getUnapprovedData")
+          .get("https://cdp-backend.onrender.com/admin/getUnapprovedData")
           .then((res) => {
             console.log(res);
             setUnapproved(res.data);
@@ -47,7 +47,7 @@ const Unapproved = () => {
     console.log(window.sessionStorage.getItem("adminName"));
 
     axios
-      .put("http://127.0.0.1:5000/admin/denySuppliers", {
+      .put("https://cdp-backend.onrender.com/admin/denySuppliers", {
         _id: id,
         comments: comments,
         username: window.sessionStorage.getItem("adminName"),
@@ -55,7 +55,7 @@ const Unapproved = () => {
       .then(async (res) => {
         console.log(res);
         await axios
-          .get("http://127.0.0.1:5000/admin/getUnapprovedData")
+          .get("https://cdp-backend.onrender.com/admin/getUnapprovedData")
           .then((res) => {
             console.log(res);
             setUnapproved(res.data);
@@ -108,7 +108,7 @@ const Unapproved = () => {
                         <a
                           className="px-4 py-2 bg-[#FCBD16] rounded-md font-semibold "
                           target="_blank"
-                          href={`http://127.0.0.1:5000/admin/downloadFiles/${supplier._id}`}
+                          href={`https://cdp-backend.onrender.com/admin/downloadFiles/${supplier._id}`}
                         >
                           Download
                         </a>

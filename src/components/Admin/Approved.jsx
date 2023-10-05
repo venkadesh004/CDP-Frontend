@@ -11,7 +11,7 @@ const Approved = () => {
   const [approved, setApproved] = useState([]);
   useEffect(() => {
     setLoading(true)
-    axios.get("http://127.0.0.1:5000/admin/getApprovedData").then((res) => {
+    axios.get("https://cdp-backend.onrender.com/admin/getApprovedData").then((res) => {
       setApproved(res.data);
       setLoading(false)
     }).catch(()=>{
@@ -61,7 +61,7 @@ const Approved = () => {
                       <a
                         className="px-4 py-2 bg-white/20 rounded-md font-semibold"
                         target="_blank"
-                        href={`http://127.0.0.1:5000/admin/downloadFiles/${supplier._id}`}
+                        href={`https://cdp-backend.onrender.com/admin/downloadFiles/${supplier._id}`}
                       >
                         Download
                       </a>
